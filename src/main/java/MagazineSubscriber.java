@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.Flow;
 import java.util.logging.Logger;
 
@@ -7,6 +9,11 @@ public class MagazineSubscriber implements Flow.Subscriber<Integer>  {
 
     private final long sleepTime;
     private final String subscriberName;
+
+    private Flow.Subscription subscription;
+
+    private Integer receivedItem;
+    private int cReceivedItens;
 
     /**
      * Construtor.
@@ -20,6 +27,8 @@ public class MagazineSubscriber implements Flow.Subscriber<Integer>  {
         // @TODO
         // Complete aqui com outras inicialiações de estado que seu objeto precisa manter para
         // atender aos requisitos do enunciado.
+        this.receivedItem = 0;
+        this.cReceivedItens = 0;
     }
 
     /**
@@ -31,6 +40,9 @@ public class MagazineSubscriber implements Flow.Subscriber<Integer>  {
      */
     public void onSubscribe(Flow.Subscription subscription) {
        // @TODO
+        this.subscription = subscription;
+
+        this.subscription.request(1);
     }
 
     /**
@@ -44,7 +56,18 @@ public class MagazineSubscriber implements Flow.Subscriber<Integer>  {
      * @param item a próxima revista entregue ao assinante
      */
     public void onNext(Integer item) {
+        if (item - this.receivedItem > 1) {
+            Integer lostItem = item - this.receivedItem + 1;
+            log("Perdi o item : " + lostItem);
+        }
+
         // @TODO
+        this.receivedItem = item;
+        log("Recebido item: " + item);
+
+        takeSomeRest();
+
+        this.subscription.request(1);
     }
 
     /**
@@ -63,6 +86,7 @@ public class MagazineSubscriber implements Flow.Subscriber<Integer>  {
      */
     public void onComplete() {
         // @TODO
+        log("Recebei "+ this.cReceivedItens+ " revistas");
     }
 
     /**

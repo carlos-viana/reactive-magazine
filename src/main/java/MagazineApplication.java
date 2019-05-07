@@ -21,12 +21,12 @@ public class MagazineApplication {
                 "tamanho do buffer não é tão importante nesse caso");
         app.magazineDeliveryExample(100L, 100L, 8);
 
-        log.info("\n\n### CASE 2: Um assinante lento mas um bom tamanho de buffer para garantir a entrega " +
-                "de todas as revistas.");
-        app.magazineDeliveryExample(1000L, 3000L, NUMBER_OF_MAGAZINES);
-
-        log.info("\n\n### CASE 3: Um assinante lento e um buffer limitado");
-        app.magazineDeliveryExample(1000L, 3000L, 8);
+//        log.info("\n\n### CASE 2: Um assinante lento mas um bom tamanho de buffer para garantir a entrega " +
+//                "de todas as revistas.");
+//        app.magazineDeliveryExample(1000L, 3000L, NUMBER_OF_MAGAZINES);
+//
+//        log.info("\n\n### CASE 3: Um assinante lento e um buffer limitado");
+//        app.magazineDeliveryExample(1000L, 3000L, 8);
 
     }
 
